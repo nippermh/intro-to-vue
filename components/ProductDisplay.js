@@ -8,7 +8,7 @@ used to configure our root Vue app).
 app.component('product-display', {
   props: {
     premium: {
-      type: Boolean,
+      type: Boolean,  //prop validation
       required: true
     }
   },
@@ -108,7 +108,8 @@ app.component('product-display', {
   },
   methods: {
     addToCart() {
-      this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
+      //from the variant above we get the selected item and its id and emit it
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].id) 
   },
   // solution
   removeFromCart() {
@@ -116,7 +117,7 @@ app.component('product-display', {
   },
 
   updateVariant(index) {
-    this.selectedVariant = index
+    this.selectedVariant = index //assign the index to the selection
   }
 },
   computed: {
@@ -133,8 +134,8 @@ app.component('product-display', {
           return this.brand + ' ' + this.product
       },
       shipping() {
-        if (this.premium) {
-          return 'Free'
+        if (this.premium) { //if user is premium
+          return 'Free' //price is free
         }
           return 2.99
         

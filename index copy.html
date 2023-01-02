@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Mastery</title>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="nav-bar"></div>
+      <div class="cart">Cart({{ cart }})</div>
+      <div class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+            <a :href="href"> <img v-bind:src="image"></a>
+          </div>
+
+          <div class="product-info">
+            <h1>{{ title }}</h1>
+
+            <p v-if="inventory > 10">In stock as there are more than 10</p>
+
+            <p v-if="inStock">In Stock</p>
+
+            <!--p v-else-if="inventory <= 10 && inventory > 0">Almost Sold out!</!--p-->
+
+            <p v-else>Out of Stock</p>
+
+            <p v-if="onSale">{{ onSaleMessage }} on sale now!</p>
+
+            <ul>
+              <li v-for="detail in details">{{ detail }}</li>
+            </ul>
+
+            <div
+              v-for="(variant, index) in variants"
+              :key="variant.id"
+              @mouseover="updateVariant(index)"
+              class="color-circle"
+              :style="{backgroundColor: variant.color }"
+            ></div>
+
+            <div v-for="(size, index) in sizes" :key="index">{{ size }}</div>
+
+            <button
+              class="button"
+              v-on:click="addToCart"
+              :class="{ disabledButton: !inStock }"
+              :disabled="!inStock"
+            >
+              Add to Cart
+            </button>
+            <button class="button" @click="removeFromCart">Remove item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Import Js -->
+    <script src="./main.js"></script>
+    <!-- Mount App -->
+    <script>
+      const mountedApp = app.mount("#app");
+    </script>
+  </body>
+</html>

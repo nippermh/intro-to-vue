@@ -4,10 +4,10 @@ app.component("review-form", {
     `<form class="review-form" @submit.prevent="onSubmit"><!--prevent default behaviour of form-->
       <h3>Leave a review</h3>
       <label for="name">Name:</label>
-      <input id="name">
+      <input id="name" v-model="name">
   
       <label for="review">Review:</label>      
-      <textarea id="review"></textarea>
+      <textarea id="review" v-model="review"></textarea>
   
       <label for="rating">Rating:</label>
       <select id="rating" v-model.number="rating"><!--modifier that typcasts the value as a number-->
@@ -43,10 +43,11 @@ app.component("review-form", {
   },
      methods: {
        onSubmit() {
-       /*  if (this.name === '' || this.review === '' || this.rating === null || this.recommend === null) {
+        //very basic validation only
+        if (this.name === '' || this.review === '' || this.rating === null || this.recommend === null) {
           alert('Review is incomplete. Please fill out every field.')
           return
-        } */
+        }  
 
          let productReview = { 
            name: this.name,

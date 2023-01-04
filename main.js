@@ -9,7 +9,7 @@ const app = Vue.createApp({
     },
     methods: {
       updateCart(id) { //we accept the id
-        this.cart.push(id) //and add it on click
+        this.cart.push(id) //and add it on click to the cart
       },
       removeById(id) {
         const index = this.cart.indexOf(id)

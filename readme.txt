@@ -101,3 +101,65 @@ Every time we click the button, the cart is updated by 1 item. v-on is essential
 SHORT HAND FOR V_ON
 
 We can also add the following shortcut for v-on: <button class="button" @click="addToCart">Add to Cart</button>
+
+A mouseover example
+
+    variants: [
+      { id: 2234, color: 'green', image: './assets/images/socks_green.jpg' },
+      { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' },
+    ]
+
+<div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)">{{ variant.color }}</div>
+
+The method would look like this:
+
+ updateImage(variantImage) {
+    this.image = variantImage
+  }
+It expects the variantImage as the parameter, and when it’s run, it sets this.image (in this Vue instance’s data) equal to the variant image that was passed in.
+
+Now in the browser, when we hover our mouse over “green”, we should see the green image. When we hover over “blue”, we should see the blue image.
+
+********************************
+CLASS AND STYLE BINDING
+********************************
+The class="color-circle" styles the color circle like so:
+
+  <div
+    v-for="(variant, index) in variants"
+    :key="variant.id"
+    @mouseover="updateVariant(index)"
+    class="color-circle"
+    :style="{backgroundColor: variant.color }" //here we add the background color
+></div>
+
+We are using an object in javascript so we use either camel or kebab case but we have to use quotes to do that. 
+
+Stopping users from accessing the cart when out of stock:
+
+<button
+  class="button"
+  v-on:click="addToCart"
+  :class="{ disabledButton: !inStock }" //add disabled button class when product not in stock
+  :disabled="!inStock"  //here we disable the button if no stock
+>
+We also have:
+  inStock: true,
+
+  Multiple classes can be handled in this way:
+  <div class="color-circle" :class="{active: activeClass}">
+
+  and then we have:
+
+  data() {
+    return {
+      activeClass: true
+    }
+  } 
+
+  this will return:
+  <div class="color-circle active"></div>
+
+  We can also use ternary operators like so:
+
+  

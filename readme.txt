@@ -162,4 +162,10 @@ We also have:
 
   We can also use ternary operators like so:
 
-  
+  <div :class="[isActive ? activeClass: '']"></div>
+
+  data() {
+    return {
+      isActive: true
+    }
+  }
